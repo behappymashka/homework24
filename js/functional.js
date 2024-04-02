@@ -52,28 +52,40 @@ function createUserRowContent(userRow, user) {
     createElement('input', {type: 'button', value: 'Remove', 'data-action': 'remove'}, '', divButtons);
 
 
-    divButtons.querySelector('input[data-action="remove"]').addEventListener('click', () => {
+   /* divButtons.querySelector('input[data-action="remove"]').addEventListener('click', () => {
         const userId = user.id;
         removeUserData(userId, userRow);
     });
-
-}
-
-//обновление айди после удаления из списка
-function updateIdsAfterDelete() {
-    const userRows = document.querySelectorAll('.user_row');
-    users.forEach((user, index) => {
-        user.id = index + 1; // Обновляем id пользователя в массиве
-        const userRow = userRows[index];
-        if (userRow) {
-            userRow.setAttribute('data-id', index + 1); // Обновляем id пользователя в DOM
-            const userIdElement = userRow.querySelector('.user_id');
-            if (userIdElement) {
-                userIdElement.textContent = index + 1; // Обновляем текст id пользователя в DOM
-            }
-        }
+*/
+    divButtons.querySelectorAll('input').forEach(button => {
+        button.addEventListener('click', () => {
+            const userId = user.id;
+            const userRow = button.closest('.user_row');
+            const dataAction = button.getAttribute('data-action');
+            handleButtonClick(dataAction, userId, userRow);
+        });
     });
+
+
 }
+
+function handleButtonClick(action, userId, userRow) {
+    switch (action) {
+        case 'view':
+            const user = getUserById(userId);
+            showUserData(user);
+            break;
+        case 'edit':
+            const userToEdit = getUserById(userId);
+            editUserData(userToEdit);
+            break;
+        case 'remove':
+            removeUserData(userId, userRow);
+            break;
+    }
+}
+
+
 
 //обработка кликов на элементах
 function gridClickHandler(event) {
@@ -105,7 +117,9 @@ function getUserIndexById(id) {
 }
 
 //генерация после удаления
+/* function generateUserId() {
+     return users.length > 0 ? users[users.length - 1].id + 1 : 1;
+ }*/
 function generateUserId() {
-    return users.length > 0 ? users[users.length - 1].id + 1 : 1;
+    return users.length > 0 ? parseInt(users[users.length - 1].id, 10) + 1 : 1;
 }
-

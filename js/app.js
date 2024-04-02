@@ -32,9 +32,9 @@ document.querySelector('.save_btn').addEventListener('click', event => {
         if (!id) {
             user.id = generateUserId();
             saveUser(user);
-
             const parent = document.querySelector('#grid');
             const userRow = createUserRow(user);
+            document.querySelector('#form').classList.add('hidden');
             parent.appendChild(userRow);
         } else {
             user.id = id;
@@ -54,7 +54,5 @@ document.querySelector('.save_btn').addEventListener('click', event => {
 
 
     }
-
-    document.querySelector('#form').classList.add('hidden');
 
 })

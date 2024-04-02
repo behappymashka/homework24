@@ -97,10 +97,26 @@ function removeUserData(userId, userRow) {
         const confirmation = confirm("Вы уверены, что хотите удалить этого пользователя?");
         if (confirmation) {
             users.splice(userIndex, 1);
-            updateIdsAfterDelete(userIndex + 1);
+            /*updateIdsAfterDelete(userIndex);*/
             userRow.remove();
             localStorage.setItem('users', JSON.stringify(users));
         }
     }
 }
 
+//обновление айди после удаления из списка
+/*
+function updateIdsAfterDelete() {
+    const userRows = document.querySelectorAll('.user_row');
+    users.forEach((user, index) => {
+        user.id = index + 1;
+        const userRow = userRows[index];
+        if (userRow) {
+            userRow.setAttribute('data-id', index + 1);
+            const userIdElement = userRow.querySelector('.user_id');
+            if (userIdElement) {
+                userIdElement.textContent = index + 1;
+            }
+        }
+    });
+}*/
