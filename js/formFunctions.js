@@ -33,11 +33,13 @@ function clearFormData() {
 
 //редактирование юзера
 function editUserData(user) {
+
     document.querySelector('#form').classList.remove('hidden');
     document.querySelector('#view').classList.add('hidden');
 
 
     const formElements = document.forms[0].elements;
+
     formElements.save_btn.setAttribute('data-id', user.id);
 
     for (let key in user) {

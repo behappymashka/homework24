@@ -85,8 +85,6 @@ function handleButtonClick(action, userId, userRow) {
     }
 }
 
-
-
 //обработка кликов на элементах
 function gridClickHandler(event) {
     if (event.target.nodeName === 'INPUT') {
@@ -113,7 +111,7 @@ function getUserById(id) {
 
 //генерация айди индекса
 function getUserIndexById(id) {
-    return users.findIndex(user => user.id === id);
+    return users.findIndex(user => user.id == id);
 }
 
 //генерация после удаления

@@ -51,6 +51,7 @@ document.querySelector('.save_btn').addEventListener('click', event => {
             saveUser(user, false);
         }
         clearFormData();
+        document.querySelector('#form').classList.add('hidden');
 
 
     }
