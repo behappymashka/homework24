@@ -114,10 +114,6 @@ function getUserIndexById(id) {
     return users.findIndex(user => user.id == id);
 }
 
-//генерация после удаления
-/* function generateUserId() {
-     return users.length > 0 ? users[users.length - 1].id + 1 : 1;
- }*/
 function generateUserId() {
     return users.length > 0 ? parseInt(users[users.length - 1].id, 10) + 1 : 1;
 }

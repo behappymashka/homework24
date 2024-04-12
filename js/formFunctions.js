@@ -80,7 +80,6 @@ function validateUser(user) {
         }
     }
     return isValid;
-
 }
 
 //сохр данных в local
@@ -104,21 +103,37 @@ function removeUserData(userId, userRow) {
             localStorage.setItem('users', JSON.stringify(users));
         }
     }
+    document.querySelector('#form').classList.add('hidden');
 }
 
-//обновление айди после удаления из списка
-/*
-function updateIdsAfterDelete() {
-    const userRows = document.querySelectorAll('.user_row');
-    users.forEach((user, index) => {
-        user.id = index + 1;
-        const userRow = userRows[index];
-        if (userRow) {
-            userRow.setAttribute('data-id', index + 1);
-            const userIdElement = userRow.querySelector('.user_id');
-            if (userIdElement) {
-                userIdElement.textContent = index + 1;
-            }
-        }
-    });
-}*/
+
+//валидация формы на корректность данных (регулярка)
+function validateForm(user) {
+    const nameRegExp = /^\w{2,}$/i;
+    const loginRefExp = /^\w{2,}$/i;
+    const emailRefExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const ageRefExp = /^(1[89]|[2-9][0-9]|1[01][0-9]|120)$/;
+
+    if (!nameRegExp.test(user.name)) {
+        alert('Invalid name. Please enter a valid name (2-30 characters, letters only)');
+        return false;
+    }
+    if (!loginRefExp.test(user.login)) {
+        alert('Invalid login. Please enter a valid name (2-30 characters, letters only)');
+        return false;
+    }
+    if (!emailRefExp.test(user.email)) {
+        alert('Invalid email. Please enter a valid email address');
+        return false;
+    }
+
+    if (!ageRefExp.test(user.age)) {
+        alert('Invalid age. Please enter a valid age between 18 and 120');
+        return false;
+    }
+    return true;
+}
+
+
+
+

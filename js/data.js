@@ -12,3 +12,4 @@ const defaultUsers = [
         age: 25,
     },
 ]
+

@@ -24,11 +24,9 @@ document.querySelector('.view_close_button').addEventListener('click', () => {
 document.querySelector('.save_btn').addEventListener('click', event => {
     const id = event.target.getAttribute('data-id')
     const user = collectData();
-    const isValid = validateUser(user);
+    const isValid = validateForm(user);
 
-    if (!isValid) {
-        alert('invalid - enter data');
-    } else {
+    if (isValid) {
         if (!id) {
             user.id = generateUserId();
             saveUser(user);
@@ -49,9 +47,11 @@ document.querySelector('.save_btn').addEventListener('click', event => {
             userRow.innerHTML = '';
             createUserRowContent(userRow, user);
             saveUser(user, false);
-        }
+    }
+
         clearFormData();
         document.querySelector('#form').classList.add('hidden');
+        validateForm(user);
 
 
     }
